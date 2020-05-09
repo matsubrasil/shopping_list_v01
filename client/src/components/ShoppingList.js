@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 
 const ShoppingList = ({ item, getItems, deleteItem }) => {
   const { items } = item;
+
   useEffect(() => {
     getItems();
   }, [getItems]);
@@ -16,18 +17,21 @@ const ShoppingList = ({ item, getItems, deleteItem }) => {
     deleteItem(id);
     //setItems(items.filter((item) => item.id !== id));
   };
+  if (!items) {
+    return <div>Loading..</div>;
+  }
   return (
     <Container>
       <ListGroup>
         <TransitionGroup className="shopping-list">
-          {items.map(({ id, name }) => (
-            <CSSTransition key={id} timeout={500} classNames="fade">
+          {items.map(({ _id, name }) => (
+            <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem>
                 <Button
                   className="remove-btn"
                   color="danger"
                   size="sm"
-                  onClick={() => onHandleDelete(id)}
+                  onClick={() => onHandleDelete(_id)}
                 >
                   &times;
                 </Button>

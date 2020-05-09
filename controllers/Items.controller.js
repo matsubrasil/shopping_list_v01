@@ -2,7 +2,7 @@ const Item = require('./../models/Items');
 
 const index = async (req, res) => {
   try {
-    const results = await Item.find();
+    const results = await Item.find().sort({ date: -1 });
     return res.status(200).json({ success: true, data: results });
   } catch (error) {
     return res.status(500).json({ success: false, error: error.message });
