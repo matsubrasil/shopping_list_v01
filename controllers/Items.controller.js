@@ -1,5 +1,8 @@
 const Item = require('./../models/Items');
 
+// @route   GET api/items
+// @desc    Get All Items
+// @access  Public
 const index = async (req, res) => {
   try {
     const results = await Item.find().sort({ date: -1 });
@@ -9,6 +12,9 @@ const index = async (req, res) => {
   }
 };
 
+// @route   POST api/items
+// @desc    Create new Item
+// @access  Private
 const store = async (req, res) => {
   try {
     const { name } = req.body;
@@ -20,7 +26,9 @@ const store = async (req, res) => {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
-
+// @route   DELETE api/items/:id
+// @desc    Delete a Item
+// @access  Private
 const del = async (req, res) => {
   try {
     const { id } = req.params;
