@@ -37,6 +37,7 @@ export default function (state = INITIAL_STATE, action) {
     //
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
+      localStorage.setItem('token', action.payload.token);
       return {
         ...state,
         ...action.payload,
@@ -48,6 +49,7 @@ export default function (state = INITIAL_STATE, action) {
     case LOGIN_FAIL:
     case LOGOUT_SUCCESS:
     case REGISTER_FAIL:
+      //console.log('authReducer. ==>', action.type);
       localStorage.removeItem('token');
       return {
         ...state,
